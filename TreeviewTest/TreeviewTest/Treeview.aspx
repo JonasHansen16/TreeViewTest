@@ -28,15 +28,23 @@
                         },
                         error: function (jqxhr, status, exception) {
                             alert('Exception:', exception);
-                        }
-                    }
+                        },
+
+                    },
                 },
-                "plugins": ["themes", "json_data", "search"]
+                    "search": {
+
+                            "case_insensitive": true,
+                            "show_only_matches": true
+                },
+                "checkbox": { cascade: "", three_state: false },
+
+                "plugins": ["themes", "json_data", "search", "checkbox", "wholerow"]
             });
         });
         $(document).on('input propertychange paste',"#searchtest", function () {
             console.log($('#searchtest').val());
-            $("#demo1").jstree(true).search($("#searchtest").val());
+            $("#demo1").jstree(false).search($("#searchtest").val());
         });
     </script>
 </head>

@@ -40,7 +40,7 @@ Public Class Treeview
 
         Dim children2() as G_JsTree = {
             New G_JsTree With{ .text = "x2-11", .attr = New G_JsTreeAttribute With { .id = "301"}},
-            New G_JsTree With{ .text = "x2-12", .attr = New G_JsTreeAttribute With { .id = "302"}, .children = { New G_JsTree With { .data = "x2-21", .attr = New G_JsTreeAttribute With{.id="3011"}}}},
+            New G_JsTree With{ .text = "x2-12", .attr = New G_JsTreeAttribute With { .id = "302"}, .children = { New G_JsTree With { .data = "x2-21" , .text = "x2-21", .attr = New G_JsTreeAttribute With{.id="3011"}}}},
             New G_JsTree With{ .text = "x2-13", .attr = New G_JsTreeAttribute With { .id = "303"}},
             New G_JsTree With{ .text = "x2-14", .attr = New G_JsTreeAttribute With { .id = "304"}}
         }
