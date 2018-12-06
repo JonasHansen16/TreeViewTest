@@ -67,8 +67,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -93,12 +92,16 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TreeControlTest.aspx" />
     <Content Include="Treeview.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\G_JsTreeAttribute.vb" />
-    <Compile Include="Classes\G_JsTree.vb" />
+    <Compile Include="Classes\TreeState.vb" />
+    <Compile Include="Classes\TreeNode.vb" />
+    <Compile Include="Classes\ITreeNode.vb" />
+    <Compile Include="Classes\ITreeState.vb" />
+    <Compile Include="CustomControl\TreeControl.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -117,6 +120,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TreeControlTest.aspx.designer.vb">
+      <DependentUpon>TreeControlTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TreeControlTest.aspx.vb">
+      <DependentUpon>TreeControlTest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Treeview.aspx.designer.vb">
       <DependentUpon>Treeview.aspx</DependentUpon>

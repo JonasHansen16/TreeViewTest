@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Treeview
+Partial Public Class TreeControlTest
     
     '''<summary>
     '''form1 control.
@@ -21,24 +21,6 @@ Partial Public Class Treeview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
-    '''<summary>
-    '''hiddenTest control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hiddenTest As Global.System.Web.UI.WebControls.HiddenField
-    
-    '''<summary>
-    '''hiddenSelected control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hiddenSelected As Global.System.Web.UI.WebControls.HiddenField
     
     '''<summary>
     '''searchtest control.
@@ -57,4 +39,13 @@ Partial Public Class Treeview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents bTest As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''tcTest control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tcTest As Global.TreeviewTest.TreeControl
 End Class

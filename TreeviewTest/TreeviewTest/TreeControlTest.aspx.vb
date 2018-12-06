@@ -1,13 +1,11 @@
 ﻿Imports System.Web.Script.Serialization
-Imports System.Web.Script.Services
-Imports System.Web.Services
 
-Public Class Treeview
+Public Class TreeControlTest
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not Page.IsPostBack Then
-            hiddenTest.Value = GetAllNodes()
+         If Not Page.IsPostBack Then
+            tcTest.TreeNodes = GetAllNodes()
         End If
     End Sub
 
@@ -34,7 +32,7 @@ Public Class Treeview
         JsTreeArray.Add(jsTree2)
 
         Dim children2() As TreeNode = {
-            New TreeNode With {.text = "x2-11",.id = "301"},
+            New TreeNode With {.text = "x2-11", .id = "301"},
             New TreeNode With {.text = "x2-12", .id = "302", .children = {New TreeNode With {.text = "x2-21", .id = "3011"}}},
             New TreeNode With {.text = "x2-13", .id = "303"},
             New TreeNode With {.text = "x2-14", .id = "304"}
@@ -53,8 +51,5 @@ Public Class Treeview
     End Function
 
     Protected Sub bTest_Click(sender As Object, e As EventArgs)
-        Dim ids = hiddenSelected.Value
-
-        GetAllNodes()
     End Sub
 End Class
