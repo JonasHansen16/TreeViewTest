@@ -10,6 +10,7 @@ Public Class TreeNode
     Public Property text() As String Implements ITreeNode.text
 
     Public Property children() As IEnumerable(Of ITreeNode) Implements ITreeNode.children
+    Public Property hasChildren As Boolean
 
     Public Property state() As ITreeState Implements ITreeNode.state
 End Class

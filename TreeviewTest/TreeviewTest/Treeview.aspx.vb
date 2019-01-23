@@ -5,56 +5,38 @@ Imports System.Web.Services
 Public Class Treeview
     Inherits System.Web.UI.Page
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not Page.IsPostBack Then
-            hiddenTest.Value = GetAllNodes()
-        End If
-    End Sub
+    <System.Web.Services.WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GetAllNodes(id As String) As List(Of TreeNode)
 
-    Public Shared Function GetAllNodes() As String
+        If id <> "#" Then
+
+                Return CreateChildren(id, 3, "xxxx")
+
+        End If
         Dim JsTreeArray = New List(Of TreeNode)
 
-        Dim JsTree = New TreeNode()
-        JsTree.text = "x1"
-        JsTree.id = 10
+        JsTreeArray.AddRange(CreateChildren(0, 5, ""))
+        JsTreeArray(0).hasChildren = True
 
-        JsTreeArray.Add(JsTree)
-
-        Dim jsTree2 = New TreeNode()
-        Dim children As List(Of TreeNode) = {
-            New TreeNode With {.text = "x1-11", .id = "201"},
-            New TreeNode With {.text = "x1-12", .id = "202"},
-            New TreeNode With {.text = "x1-13", .id = "203"},
-            New TreeNode With {.text = "x1-14", .id = "204"}
-        }.ToList()
-        jsTree2.text = "x2"
-        jsTree2.id = 20
-        jsTree2.children = children
-        jsTree2.state = New TreeState With {.selected = True}
-        JsTreeArray.Add(jsTree2)
-
-        Dim children2() As TreeNode = {
-            New TreeNode With {.text = "x2-11",.id = "301"},
-            New TreeNode With {.text = "x2-12", .id = "302", .children = {New TreeNode With {.text = "x2-21", .id = "3011"}}},
-            New TreeNode With {.text = "x2-13", .id = "303"},
-            New TreeNode With {.text = "x2-14", .id = "304"}
-        }
-
-        Dim jsTree3 = New TreeNode()
-        jsTree3.text = "x3"
-        jsTree3.id = 30
-        jsTree3.children = children2
-        jsTree3.state = New TreeState With {.selected = True, .opened = False}
-        JsTreeArray.Add(jsTree3)
-
-        Dim serializer = New JavaScriptSerializer()
-        Return serializer.Serialize(JsTreeArray)
-
+        Return JsTreeArray
     End Function
 
-    Protected Sub bTest_Click(sender As Object, e As EventArgs)
-        Dim ids = hiddenSelected.Value
+    Private Shared Function CreateChildren(_ParentID As Integer, NumOfChildren As Integer, ParentName As String) As List(Of TreeNode)
+        Dim G_JSTreeArray = New List(Of TreeNode)()
+        Dim n = 10
+        For index = 0 To NumOfChildren
+            Dim CurrChildId = If(_ParentID = 0, n, ((_ParentID * 10) + index))
+            Dim _G_JSTree = New TreeNode()
+            _G_JSTree.id = CurrChildId
+            _G_JSTree.text = If(_ParentID = 0, "root" + "-Child" + index.ToString(), ParentName + CurrChildId.ToString() + index.ToString())
+            _G_JSTree.children = Nothing
+            G_JSTreeArray.Add(_G_JSTree)
+            n = n + 10
+        Next
 
-        GetAllNodes()
-    End Sub
+
+
+        Return G_JSTreeArray
+    End Function
 End Class

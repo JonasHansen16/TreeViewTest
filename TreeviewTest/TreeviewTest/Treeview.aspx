@@ -13,46 +13,43 @@
     <title></title>
     <script type="text/javascript">
 
-        //var jstreeControl = $("demo1");
         $(document).ready(function () {
-            var state = $("#hiddenTest");
-            if (state.val() !== '') {
-                $("#demo1").jstree({
-                    'core': {
-                        'data': function (node, cb) {
-
-                            var thisVar = this;
-                            cb.call(thisVar, { d: JSON.parse(state.val()) });
-
-
+            $('#demo1').jstree({
+                'core': {
+                    'data': {
+                        'url': function (node) {
+                            return '/Treeview.aspx/GetAllNodes';
+                        },
+                        "type": 'POST',
+                        "dataType": 'JSON',
+                        "contentType": 'application/json;',
+                        'data': function (node) {
+                            return '{ "id" : ' + '"' + node.id + '"' + ' }';
 
                         },
-                    },
-                    "search": {
+                        'success': function (nodes) {
 
-                        "case_insensitive": true,
-                        'show_only_matches': true
-                    },
-                    "checkbox": { cascade: "", three_state: false, whole_node : false, tie_selection : false },
-                    "state": { "key": "demo1" },
+                            var validateChildrenArray = function (node) {
 
-                    "plugins": ["themes", "json_data", "search", "checkbox", "wholerow", "state"]
-                })
-                    .on('check_node.jstree uncheck_node.jstree', function (e, data) {
-                        alert('tsstsfghrtgrdyj');
-                    })
-                $(document).on('input propertychange paste', "#searchtest", function () {
-                    var state = $("#hiddenTest");
-                    var jstreeControl = $("#demo1");
-                    $("#demo1").jstree(true).search($("#searchtest").val());
-                });
-                $(document).on('click', "#bTest", function () {
-                    $("#hiddenSelected").val($("#demo1").jstree(true).get_selected());
-                });
-            }
+                                if (!node.children || node.children.length === 0) {
+                                    node.children = node.hasChildren;
+                                }
+                                else {
+                                    for (var i = 0; i < node.children.length; i++) {
+                                        validateChildrenArray(node.children[i]);
+                                    }
+                                }
+                            };
+
+                            for (var i = 0; i < nodes.d.length; i++) {
+                                validateChildrenArray(nodes.d[i]);
+                            }
+                        }
+                    }
+                }
+            });
+
         });
-
-
 
     </script>
 </head>
@@ -62,11 +59,9 @@
         <asp:HiddenField ID="hiddenSelected" runat="server" />
         <div>
             <asp:TextBox runat="server" ID="searchtest"></asp:TextBox>
-            <asp:Button ID="bTest" runat="server" OnClick="bTest_Click" />
-
         </div>
 
-        <div id="demo1">
+        <div id="demo1" runat="server">
         </div>
     </form>
 </body>
